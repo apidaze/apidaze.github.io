@@ -1,0 +1,29 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            APIdaze
+tagline:          Serving calls is like serving web pages
+description:      Technical stuff we work on at APIdaze.
+url:              http://developers.apidaze.io
+
+author:
+  name:           Philippe Sultan
+  url:            https://twitter.com/ApidazeEng
+
+paginate:         1
+
+# Custom vars
+version:          1.0.0
+
+github:
+  repo:           https://github.com/apidaze
+
+pages_list:       
+  About: '/about'
+  Archive: '/archive'
+  Feed: '/atom.xml'
