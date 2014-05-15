@@ -50,3 +50,66 @@ var channel = client.call(
 
 In the above example, the variables `my_parameter_that_contains_a_number` and `my_web_session_id` are passed to your ExternalScript, therefore allowing you to grant or refuse the call based on who is calling.
 
+## PHP
+
+The code snippet below shows how to log the HTTP parameters of the requests made by APIdaze to a local file `/tmp/log-urltest.txt`. The XML instructions to run on APIdaze indicate that any incoming call from number `33987654321` are routed to `33987654321`, whereas calls from any other source are refused.
+{% highlight php %}
+<?php
+$date = date('d-m-Y G:i:s');
+$logs = "[". $date . "] START OF PARAMETERS\n";
+foreach($_GET as $key => $value) {
+  $logs .= "[". $date . "] " .  $key . " : " . $value ."\n";
+}
+$logs .= "[". $date . "] END OF PARAMETERS\n";
+$fplogs = fopen('/tmp/log-urltest.txt', 'a+');
+fwrite($fplogs, $logs);
+fclose($fplogs);
+...
+
+header('Content-Type: text/xml; charset=utf-8');
+
+if ($_GET['caller_id_number'] != '33987654321') {
+  echo "
+<document>
+ <work>
+  <speak>Sorry, we cannot process your call, bye.</speak>
+  <hangup/>
+ </work>
+</document>";
+} else {
+  echo "
+<document>
+ <work>
+  <dial>  
+   <number>0033123456789</number>
+  </dial>
+  <hangup/>
+ </work>
+</document>";
+}
+?>
+{% endhighlight %}
+
+Sample content of the `/tmp/urltest.txt` log file :
+
+    [2014-01-12 10:48:38] START OF PARAMETERS
+    [2014-01-12 10:48:38] session_id : b57cd556-dc0d-11e3-89d5-07add783a6d5
+    [2014-01-12 10:48:38] uuid : b57cd556-dc0d-11e3-89d5-07add783a6d5
+    [2014-01-12 10:48:38] destination_number : 0033123456789
+    [2014-01-12 10:48:38] caller_id_number : 33987654321
+    [2014-01-12 10:48:38] caller_username : anonymous
+    [2014-01-12 10:48:38] url : http://mysite.mydomain.com/myexternalscript/answer.php
+    [2014-01-12 10:48:38] END OF PARAMETERS
+    [2014-01-12 10:49:07] START OF PARAMETERS
+    [2014-01-12 10:49:07] session_id : b57cd556-dc0d-11e3-89d5-07add783a6d5
+    [2014-01-12 10:49:07] hangup_cause : NORMAL_CLEARING
+    [2014-01-12 10:49:07] bridge_status : SUCCESS
+    [2014-01-12 10:49:07] uuid : b57cd556-dc0d-11e3-89d5-07add783a6d5
+    [2014-01-12 10:49:07] destination_number : 0033123456789
+    [2014-01-12 10:49:07] caller_id_number : 33987654321
+    [2014-01-12 10:49:07] caller_username : anonymous
+    [2014-01-12 10:49:07] url : http://mysite.mydomain.com/myexternalscript/answer.php
+    [2014-01-12 10:49:07] work_tag : <hangup/>
+    [2014-01-12 10:49:07] exiting : true
+    [2014-01-12 10:49:07] END OF PARAMETERS
+
