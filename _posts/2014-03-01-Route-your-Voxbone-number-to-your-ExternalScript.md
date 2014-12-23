@@ -11,7 +11,7 @@ Any SIP trunk can connect to APIdaze to have your incoming calls processed by yo
 
 Select `Configure` -> `URIs` -> `All URIs`. Then fill in the following fields in the web form :
 
-* URI : {E164}@80.248.213.82 (mandatory)
+* URI : {E164}@94.23.249.192 (mandatory)
 * Description : BYOT APIdaze (optional)
 
 Then save and proceed with attaching the newly created URI to the numbers your want to route to APIdaze.
