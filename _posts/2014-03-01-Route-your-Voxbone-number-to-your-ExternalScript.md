@@ -18,7 +18,7 @@ Then save and proceed with attaching the newly created URI to the numbers your w
 
 Select `Configure` -> `Numbers`, pick the numbers and choose the `BYOT APIdaze` URI under the `Voice URI` tab. Click `apply to selected` to confirm. 
 
-You have now attached your Voxbone numbers to APIdaze, let's now a register the numbers at APIdaze.
+You have now attached your Voxbone numbers to APIdaze, let's now register the numbers at APIdaze.
 
 ## APIdaze
 
